@@ -32,6 +32,20 @@ cohortRouter.get('/:id', (req, res) => {
 		});
 });
 
+//Get student by cohort ID:
+
+cohortRouter.get('/:id/students', (req, res) => {
+    const { id } = req.params
+	db('students')
+		.where({ 'cohort_id': id })
+		.then((student) => {
+			res.status(200).json(student);
+		})
+		.catch((error) => {
+			res.status(500).json(error);
+		});
+});
+
 // POST:
 
 cohortRouter.post('/', (req, res) => {
